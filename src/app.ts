@@ -4,6 +4,8 @@ import { auth } from './lib/auth';
 import config from './config';
 import cors from "cors"
 import { postRout } from './module/post/post.route';
+import errorHandler from './middleware/globalErrorHandler';
+import { notFound } from './middleware/notFound';
 const app = express ();
 
 app.use(express.json())
@@ -18,7 +20,10 @@ app.use('/post', postRout);
 app.all("/api/auth/*splat", toNodeHandler(auth));
 
 app.get('/', (req, res) =>{
-    res.send("My prisma server is running with Al-Amin Islam")
+    res.send("My Skill Bridge server API Works!")
 })
+
+app.use(errorHandler)
+app.use(notFound)
 
 export default app

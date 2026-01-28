@@ -13,19 +13,18 @@ datasource db {
   provider = "postgresql"
 }
 
-
 model User {
   id            String    @id
   name          String
   email         String
   emailVerified Boolean   @default(false)
   image         String?
-  createAt     DateTime  @default(now())
-  updateAt     DateTime  @updatedAt
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
   sessions      Session[]
   accounts      Account[]
 
-  role   String? @default("USERS")
+  role   UserRole? @default(STUDENT)
   phone  String?
   status String? @default("ACTIVE")
 
@@ -37,8 +36,8 @@ model Session {
   id        String   @id
   expiresAt DateTime
   token     String
-  createAt DateTime @default(now())
-  updateAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
   ipAddress String?
   userAgent String?
   userId    String
@@ -62,8 +61,8 @@ model Account {
   refreshTokenExpiresAt DateTime?
   scope                 String?
   password              String?
-  createAt             DateTime  @default(now())
-  updateAt             DateTime  @updatedAt
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
 
   @@index([userId])
   @@map("account")
@@ -74,9 +73,15 @@ model Verification {
   identifier String
   value      String
   expiresAt  DateTime
-  createAt  DateTime @default(now())
-  updateAt  DateTime @updatedAt
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 
   @@index([identifier])
   @@map("verification")
 }
+
+enum UserRole {
+  STUDENT
+  TUTOR
+} 
+
