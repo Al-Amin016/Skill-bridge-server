@@ -23,6 +23,8 @@ model User {
   updatedAt     DateTime  @updatedAt
   sessions      Session[]
   accounts      Account[]
+  students Student[]
+  tutor Tutor?
 
   role   UserRole? @default(STUDENT)
   phone  String?

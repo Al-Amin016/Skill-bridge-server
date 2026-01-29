@@ -3,7 +3,7 @@ import { toNodeHandler } from "better-auth/node";
 import { auth } from './lib/auth';
 import config from './config';
 import cors from "cors"
-import { postRout } from './module/post/post.route';
+import { postRout } from './module/tutor/post.route';
 import errorHandler from './middleware/globalErrorHandler';
 import { notFound } from './middleware/notFound';
 const app = express ();
